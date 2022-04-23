@@ -165,9 +165,12 @@ public class PicrossPuzzle {
 
 
     public void toggleCell(int inputRow, int inputCol) {
+        inputCol = inputCol-1;
+        inputRow = inputRow-1;
+
         for (int i = 0; i < entered.length; i++) {
             for (int j = 0; j < entered[i].length; j++) {
-                if (i-1 == inputRow && j-1 == inputCol)
+                if (i == inputRow && j == inputCol)
                     if (entered[i][j] == 0)
                         entered[i][j] = 1;
                     else if (entered[i][j] == 1)
