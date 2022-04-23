@@ -10,6 +10,7 @@ import java.util.Random;
  */
 public class PicrossPuzzle {
     private int[][] solution;
+    int [][] entered = new int[5][5];
 
     /**
      * Constructor for PicrossPuzzle with a default size of 5x5
@@ -30,8 +31,6 @@ public class PicrossPuzzle {
         for (int i = 0; i < solution.length; i++)
             for (int j = 0; j < solution[i].length; j++)
                 solution[i][j] = rand.nextInt(2);
-
-
     }
 
     /**
@@ -158,6 +157,32 @@ public class PicrossPuzzle {
         return clues;
     }
 
+    public void zeroEntered() {
+        for (int i = 0; i < entered.length; i++)
+            for (int j = 0; j < entered[i].length; j++)
+                entered[i][j] = 0;
+    }
 
+
+    public void toggleCell(int inputRow, int inputCol) {
+        for (int i = 0; i < entered.length; i++) {
+            for (int j = 0; j < entered[i].length; j++) {
+                if (i-1 == inputRow && j-1 == inputCol)
+                    if (entered[i][j] == 0)
+                        entered[i][j] = 1;
+                    else if (entered[i][j] == 1)
+                        entered[i][j] = 0;
+                System.out.print(entered[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    public void main(String[] args) {
+        zeroEntered();
+    }
 
 }
