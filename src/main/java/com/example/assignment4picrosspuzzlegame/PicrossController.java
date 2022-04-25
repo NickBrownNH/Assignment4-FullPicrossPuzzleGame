@@ -155,7 +155,6 @@ public class PicrossController<localEntered> implements Initializable {
         String currentfile = pool1.getFile();
         nameofFile.setText(currentfile.substring(0, currentfile.length() - 4));
 
-        puzzle1.zeroEntered();
         String[] rowClues = puzzle1.getRowClues();
         String[] colClues = puzzle1.getColumnClues();
         System.out.println();
@@ -184,11 +183,14 @@ public class PicrossController<localEntered> implements Initializable {
         label_5.setText(rowClues[3] + " ");
         label_6.setText(rowClues[4] + " ");
 
-        puzzle1.zeroEntered();
+        puzzle1.resetEntered();
         Button b;
         EventHandler<ActionEvent> event;
+        boolean isSelected = true;
+
 
         System.out.println(grid.getChildren().size());
+
 
         //gridpane is 7x6, row1 and col1 hold labels, so start at index 1 (skip labels)
         for (int col = 1; col < 6; col++)
@@ -205,7 +207,12 @@ public class PicrossController<localEntered> implements Initializable {
 
                 //associate event with the button being clicked
                 b.setOnAction(event);
+                    setButton(b, 0);
+
+
             }
+
+
 
 
 
@@ -256,6 +263,9 @@ public class PicrossController<localEntered> implements Initializable {
         public int inputtedRow;
         public int inputtedCol;
         PicrossPuzzle pp;
+        boolean isSelected = false;
+        Button btn;
+
 
         /**
          * Constructs an object and associates the button to the event handler
@@ -285,6 +295,28 @@ public class PicrossController<localEntered> implements Initializable {
             } else {
                 System.out.println("Puzzle not solved");
             }
+
+            int i = row * 6 + col;
+
+            btn = (Button) (grid.getChildren().get(i));
+
+
+
+
+            System.out.println(grid.getChildren().size());
+
+            if (isSelected==true) {
+                setButton(btn, 0);
+                isSelected=false;
+            } else {
+                setButton(btn, 1);
+                isSelected=true;
+            }
+
+
+
+
+
 
         }
 

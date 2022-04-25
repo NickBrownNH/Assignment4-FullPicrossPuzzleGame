@@ -157,7 +157,7 @@ public class PicrossPuzzle {
         return clues;
     }
 
-    public void zeroEntered() {
+    public void resetEntered() {
         for (int i = 0; i < entered.length; i++)
             for (int j = 0; j < entered[i].length; j++)
                 entered[i][j] = 0;
