@@ -280,6 +280,11 @@ public class PicrossController<localEntered> implements Initializable {
 
             System.out.println("You clicked row " + row + " col " + col);
             pp.toggleCell(row,col);
+            if (pp.puzzleSolved()) {
+                System.out.println("Puzzle SOLVED!!!");
+            } else {
+                System.out.println("Puzzle not solved");
+            }
 
         }
 

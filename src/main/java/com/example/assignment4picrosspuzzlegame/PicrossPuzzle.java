@@ -179,13 +179,30 @@ public class PicrossPuzzle {
             }
             System.out.println();
         }
-        System.out.println();
-        System.out.println();
-        System.out.println();
+
     }
 
-    public void main(String[] args) {
-        zeroEntered();
+
+    boolean puzzleSolved() {
+
+        int counter = 0;
+        for (int i = 0; i < solution.length; i++) {
+            for (int j = 0; j < solution[i].length; j++) {
+                if (solution[i][j] == entered[i][j]) {
+                    System.out.println(solution[i][j] + " " + entered[i][j]);
+
+                    counter++;
+                    System.out.println(counter + " " + solution.length*solution.length);
+                }
+            }
+        }
+
+        if(counter==solution.length*solution.length)
+            return true;
+        else
+            return false;
+
     }
+
 
 }
