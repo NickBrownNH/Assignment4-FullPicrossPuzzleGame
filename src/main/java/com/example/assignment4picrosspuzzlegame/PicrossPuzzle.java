@@ -1,5 +1,7 @@
 package com.example.assignment4picrosspuzzlegame;
 
+import javafx.scene.control.Alert;
+
 import java.util.Random;
 
 /**
@@ -197,11 +199,15 @@ public class PicrossPuzzle {
             }
         }
 
-        if(counter==solution.length*solution.length)
+        if(counter==solution.length*solution.length) {
             return true;
-        else
+        } else
             return false;
 
+    }
+
+    public int[][] getSolution() {
+        return solution;
     }
 
 

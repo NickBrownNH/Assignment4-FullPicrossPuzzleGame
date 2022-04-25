@@ -113,12 +113,9 @@
         <Button fx:id="b25" layoutX="342.0" layoutY="344.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
         <Label fx:id="nameofFile" alignment="CENTER" prefWidth="100.0" text="#Label" GridPane.rowIndex="6" />
       <Label GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#getNewPuzzle" prefHeight="25.0" prefWidth="99.0" text="New Game" GridPane.columnIndex="2" GridPane.rowIndex="6">
-            <font>
-                <Font size="10.0" />
-            </font></Button>
-      <Label GridPane.columnIndex="3" GridPane.rowIndex="6" />
+        <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#getNewPuzzle" prefHeight="25.0" prefWidth="99.0" text="New Game" GridPane.columnIndex="2" GridPane.rowIndex="6" />
         <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" prefWidth="99.0" text="Quit" GridPane.columnIndex="4" GridPane.rowIndex="6" />
       <Label GridPane.columnIndex="5" GridPane.rowIndex="6" />
+      <Button fx:id="newGameButton1" layoutX="176.0" layoutY="462.0" mnemonicParsing="false" onAction="#restartPuzzle" prefHeight="25.0" prefWidth="99.0" text="Start Over" GridPane.columnIndex="3" GridPane.rowIndex="6" />
     </children>
 </GridPane>

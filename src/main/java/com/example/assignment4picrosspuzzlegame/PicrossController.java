@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -38,6 +39,8 @@ public class PicrossController<localEntered> implements Initializable {
             {0,0,0,0,0},
             {0,0,0,0,0},
             {0,0,0,0,0}};
+
+    int[][] solution;
 
     @FXML
     /**
@@ -147,12 +150,49 @@ public class PicrossController<localEntered> implements Initializable {
         b.setStyle(value == 0 ? OFF_COLOR : ON_COLOR);
     }
 
+    public void restartPuzzle() {
+        PicrossPuzzle puzzle1 = new PicrossPuzzle(solution);
+        //prints file name in gui
+        solution = puzzle1.getSolution();
+
+        puzzle1.resetEntered();
+        Button b;
+        EventHandler<ActionEvent> event;
+
+        System.out.println(grid.getChildren().size());
+
+
+        //gridpane is 7x6, row1 and col1 hold labels, so start at index 1 (skip labels)
+        for (int col = 1; col < 6; col++)
+            for (int row = 1; row < 6; row++) {
+                int i = col * 6 + row;
+                System.out.println(grid.getChildren().get(i));
+                b = (Button) (grid.getChildren().get(i));
+
+                //blank out each button's text field
+                b.setText("");
+
+                //instantiate the action event
+                event = new CellEventHandler(b,puzzle1);
+
+                //associate event with the button being clicked
+                b.setOnAction(event);
+                setButton(b, 0);
+
+
+            }
+
+
+    }
+
+
     public void getNewPuzzle() {
         //creates objects
         PicrossPuzzlePool pool1 = new PicrossPuzzlePool(Paths.get(".\\Data"));
         PicrossPuzzle puzzle1 = pool1.getRandomPuzzle();
         //prints file name in gui
         String currentfile = pool1.getFile();
+        solution = puzzle1.getSolution();
         nameofFile.setText(currentfile.substring(0, currentfile.length() - 4));
 
         String[] rowClues = puzzle1.getRowClues();
@@ -186,8 +226,6 @@ public class PicrossController<localEntered> implements Initializable {
         puzzle1.resetEntered();
         Button b;
         EventHandler<ActionEvent> event;
-        boolean isSelected = true;
-
 
         System.out.println(grid.getChildren().size());
 
@@ -227,31 +265,6 @@ public class PicrossController<localEntered> implements Initializable {
      */
     public void initialize(URL url, ResourceBundle rb) {
         getNewPuzzle();
-/*
-
-        Button b;
-        EventHandler<ActionEvent> event;
-
-        System.out.println(grid.getChildren().size());
-
-        //gridpane is 7x6, row1 and col1 hold labels, so start at index 1 (skip labels)
-        for (int col = 1; col < 6; col++)
-            for (int row = 1; row < 6; row++) {
-                int i = col * 6 + row;
-                System.out.println(grid.getChildren().get(i));
-                b = (Button) (grid.getChildren().get(i));
-
-                //blank out each button's text field
-                b.setText("");
-
-                //instantiate the action event
-                event = new CellEventHandler(b);
-
-                //associate event with the button being clicked
-                b.setOnAction(event);
-            }
-*/
-
 
     }
 
@@ -260,8 +273,6 @@ public class PicrossController<localEntered> implements Initializable {
      */
     private class CellEventHandler implements EventHandler<ActionEvent> {
         private final Button b;
-        public int inputtedRow;
-        public int inputtedCol;
         PicrossPuzzle pp;
         boolean isSelected = false;
         Button btn;
@@ -292,6 +303,9 @@ public class PicrossController<localEntered> implements Initializable {
             pp.toggleCell(row,col);
             if (pp.puzzleSolved()) {
                 System.out.println("Puzzle SOLVED!!!");
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("You Solved The Puzzle!");
+                a.show();
             } else {
                 System.out.println("Puzzle not solved");
             }
@@ -321,13 +335,6 @@ public class PicrossController<localEntered> implements Initializable {
         }
 
 
-        public int getRowEntered() {
-            return inputtedRow;
-        }
-
-        public int getColEntered() {
-            return inputtedCol;
-        }
 
     }
 }
