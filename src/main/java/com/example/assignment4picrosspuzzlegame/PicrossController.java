@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.nio.file.Paths;
@@ -150,6 +151,23 @@ public class PicrossController<localEntered> implements Initializable {
         b.setStyle(value == 0 ? OFF_COLOR : ON_COLOR);
     }
 
+    public void setLabel(Label l, int val) {
+        if (val == 1) {
+            l.setStyle("-fx-background-color: blue");
+        } else if (val == 2) {
+            l.setStyle("-fx-background-color: red");
+        } else if (val == 3) {
+            l.setStyle("-fx-background-color: green");
+        } else if (val == 4) {
+            l.setStyle("-fx-background-color: orange");
+        } else if (val == 5) {
+            l.setStyle("-fx-background-color: purple");
+        } else if (val == 6) {
+            l.setStyle("-fx-background-color: yellow");
+        }
+    }
+
+
     public void restartPuzzle() {
         PicrossPuzzle puzzle1 = new PicrossPuzzle(solution);
         //prints file name in gui
@@ -225,6 +243,7 @@ public class PicrossController<localEntered> implements Initializable {
 
         puzzle1.resetEntered();
         Button b;
+        Label l;
         EventHandler<ActionEvent> event;
 
         System.out.println(grid.getChildren().size());
@@ -246,11 +265,20 @@ public class PicrossController<localEntered> implements Initializable {
                 //associate event with the button being clicked
                 b.setOnAction(event);
                     setButton(b, 0);
-
-
             }
 
+        int randomVal = (int)(Math.random()*6);
 
+        for (int col = 0; col < 6; col++) {
+                l = (Label) (grid.getChildren().get(col));
+                setLabel(l,randomVal);
+        }
+
+        for (int row = 0; row < 6; row++) {
+            int i = row*6;
+            l = (Label) (grid.getChildren().get(i));
+            setLabel(l,randomVal);
+        }
 
 
 

@@ -124,7 +124,7 @@ public class PicrossPuzzle {
     public String[] getColumnClues() {
         int cols = solution[0].length;
         String[] clues = new String[cols];
-        return getRowClues(clues,0);
+        return getColumnClues(clues,0);
     }
 
 
@@ -139,11 +139,11 @@ public class PicrossPuzzle {
         int row;
 
 
-        if (col<rows) {
+        if (col<cols) {
             clues[col] = "";
             row = 0;
             count = 0;
-            while (col < cols) {
+            while (row < rows) {
                 while (row < rows && solution[row][col] == 0) {
                     row++;
                 }
@@ -154,7 +154,7 @@ public class PicrossPuzzle {
                 clues[col] += (count > 0) ? count + " " : "";
                 count = 0;
             }
-            return getRowClues(clues,col+1);
+            return getColumnClues(clues,col+1);
         }
         return clues;
     }
